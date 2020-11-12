@@ -29,9 +29,7 @@ vector<bool> repr(int y, int x, int size) {
   return res;
 }
 
-int main() {
-  srand(time(NULL));
-
+void print_image(FILE *in) {
   int cnt = rand() % 50;
   while (cnt--) {
     int i = rand() % 4, j = rand() % 4;
@@ -51,8 +49,20 @@ int main() {
     digit |= res[i++] << 2;
     digit |= res[i++] << 1;
     digit |= res[i++];
-    printf("%X", digit);
+    fprintf(in, "%X", digit);
   }
-  printf("\n");
+  fprintf(in, "\n");
+}
+
+int main() {
+  srand(time(NULL));
+
+  FILE *in = fopen("7.in", "w");
+  const int cnt = 20;
+  for (int i = 0; i < cnt; ++i)
+    print_image(in);
+
+  fprintf(in, "0\n0\n");
+  fclose(in);
   return 0;
 }
