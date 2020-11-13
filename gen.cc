@@ -6,7 +6,9 @@
 
 using namespace std;
 
-bool im[4][4];
+const int SIZE = 4;
+
+bool im[SIZE][SIZE];
 
 vector<bool> repr(int y, int x, int size) {
   if (size == 1)
@@ -32,15 +34,15 @@ vector<bool> repr(int y, int x, int size) {
 void print_image(FILE *in) {
   int cnt = rand() % 50;
   while (cnt--) {
-    int i = rand() % 4, j = rand() % 4;
+    int i = rand() % SIZE, j = rand() % SIZE;
     im[i][j] = !im[i][j];
   }
 
-  vector<bool> res = repr(0, 0, 4);
+  vector<bool> res = repr(0, 0, SIZE);
 
   res.insert(res.begin(), 1);
-  size_t r = res.size() % 4;
-  while (r--)
+  size_t z = 4 - res.size() % 4;
+  while (z != 4 && z--)
     res.insert(res.begin(), 0);
 
   for (size_t i = 0; i < res.size();) {
@@ -57,8 +59,8 @@ void print_image(FILE *in) {
 int main() {
   srand(time(NULL));
 
-  FILE *in = fopen("7.in", "w");
-  const int cnt = 20;
+  FILE *in = fopen("9.in", "w");
+  const int cnt = 40;
   for (int i = 0; i < cnt; ++i)
     print_image(in);
 
